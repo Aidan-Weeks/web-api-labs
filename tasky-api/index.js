@@ -2,6 +2,9 @@ import dotenv from 'dotenv';
 import express from 'express';
 import tasksRouter from './api/tasks';
 import './db';
+// other imports
+import cors from 'cors';
+
 
 dotenv.config();
 
@@ -14,6 +17,8 @@ const errHandler = (err, req, res, next) => {
   res.status(500).send(`Hey!! You caught the error 👍👍. Here's the details: ${err.stack} `);
 };
 
+// Enable CORS for all requests
+app.use(cors());
 
 const app = express();
 
