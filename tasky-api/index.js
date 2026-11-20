@@ -4,6 +4,7 @@ import tasksRouter from './api/tasks';
 import './db';
 // other imports
 import cors from 'cors';
+import usersRouter from './api/users';
 
 
 dotenv.config();
@@ -17,18 +18,22 @@ const errHandler = (err, req, res, next) => {
   res.status(500).send(`Hey!! You caught the error 👍👍. Here's the details: ${err.stack} `);
 };
 
-// Enable CORS for all requests
-app.use(cors());
 
 const app = express();
 
 const port = process.env.PORT;
+
+// Enable CORS for all requests
+app.use(cors());
 
 app.use(express.static('public'));
 
 app.use(express.json());
 
 app.use('/api/tasks', tasksRouter);
+
+//Users router
+app.use('/api/users', usersRouter);
 
 app.use(errHandler);
 
